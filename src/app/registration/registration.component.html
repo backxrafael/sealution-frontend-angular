@@ -1,0 +1,20 @@
+<div id="registrations">
+    <div class="registrations-header">
+        <h2>Registrations</h2>
+        <p>{{registrations.length}}</p>
+        <button (click)="getRegistrations()">Get Registrations</button>
+    </div>
+    <div class="ship-registration" *ngFor="let registration of registrations">
+        <div class="registration-info">
+            <p class="ship-name">Ship name: {{registration.shipId}}</p>
+            <p class="client-name">Client name: {{registration.clientId}}</p>
+        </div>
+        <div *ngIf="registration.status === 'awaiting_status'" class="registration-actions">
+            <button (click)="acceptRegistration(registration)" class="btn btn-accept">Accept</button>
+            <button (click)="denyRegistration(registration)" class="btn btn-deny">Deny</button>
+        </div>
+        <div *ngIf="registration.status !== 'awaiting_status'" class="registration-actions">
+            <p>{{registration.status}}</p>
+        </div>
+    </div>
+</div>

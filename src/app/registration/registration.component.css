@@ -1,0 +1,57 @@
+p {
+    margin: 0;
+}
+
+#registrations {
+    border: 1px solid black;
+    width: 35vw;
+}
+
+.registrations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ship-name {
+    padding: 5px;
+}
+
+.client-name {
+    padding: 5px
+}
+
+.ship-registration {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid black;
+}
+.registration-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.registration-actions {
+    display: flex;
+    gap: 1vw;
+    align-items: center;
+    border-left: 1px solid black;
+    padding: 10px;
+    flex-basis: 25%;
+    justify-content: center;
+}
+
+.btn {
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+}
+
+.btn-accept {
+    background-color: rgb(92, 230, 92);
+}
+
+.btn-deny {
+    background-color: rgb(241, 111, 111);
+}
