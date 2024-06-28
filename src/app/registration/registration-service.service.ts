@@ -25,7 +25,7 @@ export class RegistrationService {
           region: environment.REGION,
         });
         const response = await client.send(new GetSecretValueCommand({
-            SecretId: environment.SECRET_ID
+            SecretId: environment.AUTHENTICATOR_SECRET_ID
         }));
         // Depends on how the secret string was set. If set as a string use 'SecretString'
         // If set as a binary stream use 'SecretBinary'
