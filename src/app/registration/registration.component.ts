@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { Registration } from "./registration";
 import { RegistrationService } from "./registration-service.service";
 import { NgFor, NgIf } from "@angular/common";
+import { DatabaseService } from "../database-service.service";
+import { environment } from "../../environments/environment";
 
 @Component({
     selector: 'registrations',
@@ -13,26 +15,33 @@ import { NgFor, NgIf } from "@angular/common";
 export class RegistrationComponent {
     title = 'registration-component';
     registrations : Registration[] = [];
-    constructor(private registrationService: RegistrationService){}
+    constructor(private registrationService: RegistrationService, private databaseService: DatabaseService){}
 
-    getRegistrations() {
-        this.registrationService.getRegistrations().subscribe(result => {
+    async getRegistrations() {
+        (await this.registrationService.getRegistrations()).subscribe(result => {
             this.registrations = result;
         });
     }
 
-    acceptRegistration(registration: Registration) {
+    async createDatabase(name: string) {
+        this.databaseService.createDatabase(name).subscribe(result => {
+            //TODO: Show errors etc if result is false or status code != 200
+            console.log(result);
+        })
+    }
+
+    async acceptRegistration(registration: Registration) {
         // Accept the registration and update the registrations by fetching the list 
         // of registrations again
-        this.registrationService.acceptRegistration(registration).subscribe(_result => {
+        (await this.registrationService.acceptRegistration(registration)).subscribe(_result => {
             this.getRegistrations();
         })
     }
 
-    denyRegistration(registration: Registration) {
+    async denyRegistration(registration: Registration) {
         // Deny the registration and update the registrations by fetching the list 
         // of registrations again
-        this.registrationService.denyRegistration(registration).subscribe(_result => {
+        (await this.registrationService.denyRegistration(registration)).subscribe(_result => {
             this.getRegistrations();
         })
     }
