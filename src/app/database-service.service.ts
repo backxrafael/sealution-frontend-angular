@@ -6,11 +6,11 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class DatabaseService {
-  BACKEND_URL=environment.BACKEND_URL;
+  BACKEND_API=environment.BACKEND_API;
   constructor(private http: HttpClient) { }
 
   createDatabase(name: string) {
-    return this.http.post<boolean>(`${this.BACKEND_URL}/v1/database`,{
+    return this.http.post<boolean>(`${this.BACKEND_API}/v1/database`,{
       "name": name
     });
   }
