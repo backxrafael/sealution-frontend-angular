@@ -2,6 +2,10 @@ p {
     margin: 0;
 }
 
+button:hover {
+    cursor: pointer;
+}
+
 #registrations {
     border: 1px solid black;
     width: 35vw;

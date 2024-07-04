@@ -8,7 +8,17 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <h1>Sealution frontend</h1>
-<registrations></registrations>
+<amplify-authenticator>
+    <ng-template
+    amplifySlot="authenticated"
+    let-user="user"
+    let-signOut="signOut">
+        <h3>Welcome {{ user.username }}</h3>
+        <button (click)="signOut()">Sign Out</button>
+        <button (click)="fetchToken()">Log Token</button>
+        <registrations></registrations>
+    </ng-template>
+</amplify-authenticator>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
