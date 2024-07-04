@@ -24,6 +24,7 @@ export class RegistrationService {
 
   async getRegistrations() : Promise<Observable<Registration[]>> {
     const {accessToken, idToken } = await this.getTokens();
+    console.log(`${this.AUTHENTICATOR_URL}/v1/register/status`);
     return this.http.get<Registration[]>(`${this.AUTHENTICATOR_URL}/v1/register/status`, {
       headers: {
         'Authorization': `${accessToken}`,
@@ -34,7 +35,7 @@ export class RegistrationService {
 
   async denyRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.put<Registration>(`${this.AUTHENTICATOR_URL}/v1/register/deny/${registration.shipId}`, {}, {
+    return this.http.put<Registration>(`${this.AUTHENTICATOR_URL}/v1/register/deny/${registration.clientId}/${registration.shipId}`, {}, {
       headers: {
          'Authorization': `${accessToken}`
       }
@@ -43,9 +44,9 @@ export class RegistrationService {
 
   async acceptRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.put<Registration>(`${this.AUTHENTICATOR_URL}/v1/register/accept/${registration.shipId}`, {}, {
+    return this.http.put<Registration>(`${this.AUTHENTICATOR_URL}/v1/register/accept/${registration.clientId}/${registration.shipId}`, {}, {
       headers: {
-         'Authorization': `Bearer ${idToken}`
+         'Authorization': `Bearer ${accessToken}`
       }
     })
   }
