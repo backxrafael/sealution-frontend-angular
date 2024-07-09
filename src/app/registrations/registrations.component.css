@@ -1,6 +1,13 @@
-.registration {
+.registrations {
     display: flex;
-    gap: 1vw;
     flex-direction: column;
     width: 50vw;
+}
+
+.registrations-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
 }

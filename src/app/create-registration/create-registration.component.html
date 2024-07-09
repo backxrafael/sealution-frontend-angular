@@ -1,5 +1,12 @@
 <div id="create-registation">
-    <input [(ngModel)]="createRegistration.shipId" type="text" placeholder="Ship id">
-    <button (click)="createAuthenticationRegistration()">Create authentication registration</button>
-    <button (click)="pollAuthenticationRegistration()">Get authentication registration status</button>
+    <div>
+        <h1>Create a registration</h1>
+    </div>
+    <div>
+        <input [(ngModel)]="createRegistration.shipId" type="text" placeholder="Ship id">
+        <div>
+            <button (click)="createAuthenticationRegistration()">Create authentication registration</button>
+            <button (click)="pollAuthenticationRegistration()">Get authentication registration status</button>
+        </div>
+    </div>
 </div>

@@ -14,11 +14,20 @@ button:hover {
     padding: 5px
 }
 
+.registration-info {
+    border-right: 1px solid black;
+    height: 100%;
+}
+
 .registration {
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
     justify-content: space-between;
+    align-items: center;
+    padding: 5px;
 }
 .registration-actions {
     display: flex;
