@@ -1,0 +1,10 @@
+<div class="registration">
+    <div class="registrations-header">
+        <h2>Registrations</h2>
+        <p>{{registrations.length}}</p>
+        <button (click)="getRegistrations()">Get Registrations</button>
+    </div>
+    <div class="ship-registration" *ngFor="let registration of registrations">
+        <registration [registration]="registration" (updateRegistrationsEvent)="getRegistrations()"/>
+    </div>
+</div>

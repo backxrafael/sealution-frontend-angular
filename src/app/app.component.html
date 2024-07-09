@@ -16,7 +16,11 @@
         <h3>Welcome {{ user.username }}</h3>
         <button (click)="signOut()">Sign Out</button>
         <button (click)="fetchToken()">Log Token</button>
-        <registrations></registrations>
+        <div style="display: flex; flex-direction: row;">
+            <registrations></registrations>
+            <create-registration></create-registration>
+        </div>
+
     </ng-template>
 </amplify-authenticator>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

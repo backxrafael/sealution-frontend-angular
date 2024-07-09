@@ -1,8 +1,8 @@
 {
   "version": "1",
   "auth": {
-    "user_pool_id": "eu-west-1_HSKEl20aw",
-    "user_pool_client_id": "5l53nqgbnc9m5sdpq6jenn3u0j",
+    "user_pool_id": "eu-west-1_rzC6YU8jJ",
+    "user_pool_client_id": "5ccqlt7ttqfqc7o46k0s6511rg",
     "aws_region": "eu-west-1"
   }
 }
