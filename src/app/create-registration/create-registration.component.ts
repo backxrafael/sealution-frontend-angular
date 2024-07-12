@@ -22,9 +22,24 @@ export class CreateRegistrationComponent {
         })
     }
 
+    downloadFile(content: string, name: string) {
+        const newBlob = new Blob([content], { type: "text/csv" });
+        const data = window.URL.createObjectURL(newBlob);
+        const link = document.createElement("a");
+        link.href = data;
+        link.download = name; // set a name for the file
+        link.click();
+    }
+
     async pollAuthenticationRegistration() {
         (await this.registrationService.getRegistrationStatus(this.createRegistration.shipId)).subscribe(result => {
-            console.log(result)
+            console.log(result);
+            if (result.certificate) {
+                this.downloadFile(result.certificate, `${result.shipInformation?.clientName}-${result.shipInformation?.shipName}-certificate.crt`)
+            }
+            if (result.PrivateKey) {
+                this.downloadFile(result.PrivateKey, `${result.shipInformation?.clientName}-${result.shipInformation?.shipName}-key.key`)
+            }
         })
     }
 }
