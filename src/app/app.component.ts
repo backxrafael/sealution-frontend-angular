@@ -4,11 +4,12 @@ import { RegistrationsComponent } from './registrations/registrations.component'
 import { AmplifyAuthenticatorModule } from '@aws-amplify/ui-angular';
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { CreateRegistrationComponent } from './create-registration/create-registration.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RegistrationsComponent, AmplifyAuthenticatorModule, CreateRegistrationComponent],
+  imports: [CommonModule, RouterOutlet, RegistrationsComponent, AmplifyAuthenticatorModule, CreateRegistrationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
