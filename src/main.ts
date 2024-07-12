@@ -5,6 +5,7 @@ import { Amplify } from 'aws-amplify';
 import { environment } from './environments/environment';
 
 const awsconfig = {
+  "verion": "1",
   "auth": {
     "user_pool_id": environment.USERPOOL_ID,
     "user_pool_client_id": environment.USERPOOL_CLIENT_ID,
