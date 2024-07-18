@@ -69,6 +69,15 @@ export class RegistrationService {
     }).pipe(catchError(this.handleError));
   }
 
+  async resetRegistration(registration: Registration) {
+    const {accessToken, idToken } = await this.getTokens();
+    return this.http.post<Registration>(`${this.AUTHENTICATOR_API}/v1/register/reset/${registration.shipId}`, {}, {
+      headers: {
+         'Authorization': `${accessToken}`
+      }
+    }).pipe(catchError(this.handleError));
+  }
+
   async denyRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();
     return this.http.put<Registration>(`${this.AUTHENTICATOR_API}/v1/register/deny/${registration.shipId}`, {}, {

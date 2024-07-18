@@ -18,5 +18,6 @@
     </div>
     <div *ngIf="registration.status !== 'awaiting_status'" class="registration-actions">
         <p>{{registration.status}}</p>
+        <button class="btn" (click)="resetRegistration(registration)">Reset registration</button>
     </div>
 </div>

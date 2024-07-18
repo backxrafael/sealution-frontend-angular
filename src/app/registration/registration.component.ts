@@ -41,4 +41,12 @@ export class RegistrationComponent {
             this.updateRegistrationsEvent.emit(true);
         })
     }
+
+    async resetRegistration(registration: Registration) {
+        // Reset the registration of a registration
+        // i.e delete the linked certificate
+        (await this.registrationService.resetRegistration(registration)).subscribe(_result => {
+            this.updateRegistrationsEvent.emit(true);
+        })
+    }
 }
