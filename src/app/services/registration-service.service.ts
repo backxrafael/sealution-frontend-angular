@@ -10,7 +10,7 @@ import { CreateRegistration } from '../create-registration/create-registration';
   providedIn: 'root'
 })
 export class RegistrationService {
-  AUTHENTICATOR_API = environment.AUTHENTICATOR_API;
+  BACKEND_API = environment.BACKEND_API;
   constructor(private http: HttpClient) { }
   handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
@@ -38,7 +38,7 @@ export class RegistrationService {
 
   async createRegistrationRequest(registrationRequest: CreateRegistration) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.post<Registration>(`${this.AUTHENTICATOR_API}/v1/register`, 
+    return this.http.post<Registration>(`${this.BACKEND_API}/v1/register`, 
     {
       shipId: registrationRequest.shipId
     },
@@ -52,7 +52,7 @@ export class RegistrationService {
 
   async getRegistrationStatus(shipId: string) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.get<Registration>(`${this.AUTHENTICATOR_API}/v1/register/status/${shipId}`, {
+    return this.http.get<Registration>(`${this.BACKEND_API}/v1/register/status/${shipId}`, {
       headers: {
         'Authorization': `${accessToken}`,
       }
@@ -61,7 +61,7 @@ export class RegistrationService {
 
   async getRegistrations() : Promise<Observable<Registration[]>> {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.get<Registration[]>(`${this.AUTHENTICATOR_API}/v1/register/status`, {
+    return this.http.get<Registration[]>(`${this.BACKEND_API}/v1/register/status`, {
       headers: {
         'Authorization': `${accessToken}`,
         'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ export class RegistrationService {
 
   async resetRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.post<Registration>(`${this.AUTHENTICATOR_API}/v1/register/reset/${registration.shipId}`, {}, {
+    return this.http.post<Registration>(`${this.BACKEND_API}/v1/register/reset/${registration.shipId}`, {}, {
       headers: {
          'Authorization': `${accessToken}`
       }
@@ -80,7 +80,7 @@ export class RegistrationService {
 
   async denyRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();
-    return this.http.put<Registration>(`${this.AUTHENTICATOR_API}/v1/register/deny/${registration.shipId}`, {}, {
+    return this.http.put<Registration>(`${this.BACKEND_API}/v1/register/deny/${registration.shipId}`, {}, {
       headers: {
          'Authorization': `${accessToken}`
       }
@@ -93,7 +93,7 @@ export class RegistrationService {
       shipName: registration.shipName,
       clientName: registration.clientName
     }
-    return this.http.post(`${this.AUTHENTICATOR_API}/v1/register/accept/${registration.shipId}`, 
+    return this.http.post(`${this.BACKEND_API}/v1/register/accept/${registration.shipId}`, 
       data, 
       {
       headers: {
