@@ -9,7 +9,7 @@ import { CreateRegistration } from '../create-registration/create-registration';
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrationService {
+export class BackendService {
   BACKEND_API = environment.BACKEND_API;
   constructor(private http: HttpClient) { }
   handleError(error: HttpErrorResponse) {
@@ -101,5 +101,23 @@ export class RegistrationService {
         'Content-Type': 'application/json'
       },
     }).pipe(catchError(this.handleError));
+  }
+
+  async createInfluxDBOrganization(name: string, bucketName: string, userName: string) {
+    const {accessToken, idToken } = await this.getTokens();
+    const data = {
+      name: name,
+      bucket: {
+        name: bucketName
+      },
+    }
+    return this.http.post<boolean>(`${this.BACKEND_API}/v1/influx/organization`,
+      data,
+      {
+        headers: {
+          'Authorization': `${accessToken}`,
+          'Content-Type': 'application/json'
+        },
+      }).pipe(catchError(this.handleError));
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { CreateRegistration } from "./create-registration";
-import { RegistrationService } from "../services/registration-service.service";
+import { BackendService } from "../services/backend-service.service";
 
 @Component({
     selector: 'create-registration',
@@ -11,13 +11,13 @@ import { RegistrationService } from "../services/registration-service.service";
     styleUrl: './create-registration.component.css',
 })
 export class CreateRegistrationComponent {
-    constructor(private registrationService: RegistrationService) {}
+    constructor(private backendService: BackendService) {}
     @Input() createRegistration: CreateRegistration = {
         shipId: ''
     };
 
     async createAuthenticationRegistration() {
-        (await this.registrationService.createRegistrationRequest(this.createRegistration)).subscribe(result => {
+        (await this.backendService.createRegistrationRequest(this.createRegistration)).subscribe(result => {
             console.log(result)
         })
     }
@@ -32,7 +32,7 @@ export class CreateRegistrationComponent {
     }
 
     async pollAuthenticationRegistration() {
-        (await this.registrationService.getRegistrationStatus(this.createRegistration.shipId)).subscribe(result => {
+        (await this.backendService.getRegistrationStatus(this.createRegistration.shipId)).subscribe(result => {
             console.log(result);
             if (result.certificate) {
                 this.downloadFile(result.certificate, `${result.shipInformation?.clientName}-${result.shipInformation?.shipName}-certificate.crt`)
