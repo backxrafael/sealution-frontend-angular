@@ -77,6 +77,15 @@ export class BackendService {
       }
     }).pipe(catchError(this.handleError));
   }
+  
+  async revokeCertificate(registration: Registration) {
+    const {accessToken, idToken } = await this.getTokens();
+    return this.http.post<Registration>(`${this.BACKEND_API}/v1/register/revoke/${registration.shipId}`, {}, {
+      headers: {
+         'Authorization': `${accessToken}`
+      }
+    }).pipe(catchError(this.handleError));
+  }
 
   async denyRegistration(registration: Registration) {
     const {accessToken, idToken } = await this.getTokens();

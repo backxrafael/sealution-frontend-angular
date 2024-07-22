@@ -48,4 +48,12 @@ export class RegistrationComponent {
             this.updateRegistrationsEvent.emit(true);
         })
     }
+
+    async revokeCertificate(registration: Registration) {
+        // Revoke the certificate of a registration
+        // i.e set certificate status to inactive
+        ((await this.backendService.revokeCertificate(registration)).subscribe(_result => {
+            this.updateRegistrationsEvent.emit(true);
+        }))
+    }
 }
