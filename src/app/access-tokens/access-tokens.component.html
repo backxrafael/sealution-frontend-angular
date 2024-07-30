@@ -1,0 +1,21 @@
+<div class="access-tokens">
+    <div class="access-tokens-header">
+        <h2>Access Tokens</h2>
+        <p> {{ accessTokens.length }} </p>
+        <button (click)="updateAccessTokens()"> Get access tokens </button>
+        <button (click)="generateAccessToken()">Generate new access token</button>
+    </div>
+    <div class="access-token" *ngFor="let accessToken of accessTokens">
+        <div>
+            <div>
+                <p>token: {{ accessToken.token }}</p>
+                <p>valid: {{ accessToken.valid }}</p>
+            </div>
+            <div>
+                <button class="btn" (click)="invalidateToken(accessToken.id)">Invalidate token</button>
+                <button class="btn" (click)="validateToken(accessToken.id)">Validate Token</button>
+                <button class="btn" (click)="deleteToken(accessToken.id)">Delete token</button>
+            </div>
+        </div> 
+    </div>
+</div>

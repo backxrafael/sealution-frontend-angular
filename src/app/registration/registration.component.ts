@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { Registration } from "./registration";
+import { Registration } from "../../types/registration";
 import { BackendService } from "../services/backend-service.service";
 import { NgFor, NgIf } from "@angular/common";
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ export class RegistrationComponent {
     @Input() registration! : Registration;
     @Output() updateRegistrationsEvent = new EventEmitter<boolean>();
     title = 'registration-component';
-    constructor(private BackendService: BackendService, private backendService: BackendService){}
+    constructor(private backendService: BackendService){}
 
     async createDatabase(name: string, bucketName: string, userName: string) {
         (await this.backendService.createInfluxDBOrganization(name,bucketName, userName)).subscribe(result => {
@@ -27,7 +27,7 @@ export class RegistrationComponent {
     async acceptRegistration(registration: Registration) {
         // Accept the registration and update the registrations by fetching the list 
         // of registrations again
-        (await this.BackendService.acceptRegistration(registration)).subscribe(_result => {
+        (await this.backendService.acceptRegistration(registration)).subscribe(_result => {
             this.updateRegistrationsEvent.emit(true);
         })
         await this.createDatabase(registration.clientName, `${registration.clientName}-bucket`, registration.shipName)
@@ -36,7 +36,7 @@ export class RegistrationComponent {
     async denyRegistration(registration: Registration) {
         // Deny the registration and update the registrations by fetching the list 
         // of registrations again
-        (await this.BackendService.denyRegistration(registration)).subscribe(_result => {
+        (await this.backendService.denyRegistration(registration)).subscribe(_result => {
             this.updateRegistrationsEvent.emit(true);
         })
     }
@@ -44,7 +44,7 @@ export class RegistrationComponent {
     async resetRegistration(registration: Registration) {
         // Reset the registration of a registration
         // i.e delete the linked certificate
-        (await this.BackendService.resetRegistration(registration)).subscribe(_result => {
+        (await this.backendService.resetRegistration(registration)).subscribe(_result => {
             this.updateRegistrationsEvent.emit(true);
         })
     }

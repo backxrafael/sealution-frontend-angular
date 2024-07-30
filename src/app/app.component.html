@@ -15,10 +15,10 @@
     let-signOut="signOut">
         <h3>Welcome {{ user.username }}</h3>
         <button (click)="signOut()">Sign Out</button>
-        <button (click)="fetchToken()">Log Token</button>
         <div style="display: flex; flex-direction: row; gap: 2vw;">
             <registrations></registrations>
             <create-registration></create-registration>
+            <access-tokens></access-tokens>
         </div>
 
     </ng-template>

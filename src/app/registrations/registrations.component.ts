@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Registration } from "../registration/registration";
+import { Registration } from "../../types/registration";
 import { NgFor, NgIf } from "@angular/common";
 import { BackendService } from "../services/backend-service.service";
 import { RegistrationComponent } from "../registration/registration.component";
