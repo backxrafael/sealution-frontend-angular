@@ -4,6 +4,7 @@ import { CreateRegistration } from "./create-registration";
 import { BackendService } from "../services/backend-service.service";
 import { NgIf } from "@angular/common";
 import * as sentry from '@sentry/angular';
+import { environment } from "../../environments/environment";
 
 @Component({
     selector: 'create-registration',
@@ -32,6 +33,7 @@ export class CreateRegistrationComponent {
             },
             error: (error) => {
                 try {
+                    console.log(environment.SENTRY_DSN);
                     this.showErrorMessage = true;
                     this.showSuccessMessage = false;
                     this.errorMessage = 'There was an error creating the registration request, please try again later'
