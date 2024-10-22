@@ -1,0 +1,37 @@
+.btn-normal {
+    background-color: rgb(51,96,212);
+    padding: 0 10px;
+}
+
+#create-registration {
+    width: 50vw;
+    margin: auto;
+}
+
+.create-registration {
+    display: flex;
+    gap: 3vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-registration-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1vh;
+}
+
+.btn-create {
+    background-color: rgb(83, 165, 81);
+    color: white;
+}
+
+.btn {
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    font-size: small;
+    color: white;
+}

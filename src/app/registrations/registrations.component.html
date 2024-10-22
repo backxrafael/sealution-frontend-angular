@@ -1,10 +1,26 @@
 <div class="registrations">
-    <div class="registrations-header">
+    <div class="registrations-title">
         <h2>Registrations</h2>
-        <p>{{registrations.length}}</p>
-        <button (click)="getRegistrations()">Get Registrations</button>
+        <!-- <p>{{registrations.length}}</p> -->
+        <mat-spinner *ngIf="isLoading" class="spinner"/>
+        <button class="btn btn-normal" (click)="getRegistrations()">Get Registrations</button>
     </div>
+    <div *ngIf="showErrorMessage" class="error-alert">
+        <p class="error-message"> {{errorMessage}} </p>
+    </div>
+    <div *ngIf="showSuccessMessage" class="success-alert">
+        <p class="success-message"> {{successMessage}} </p>
+    </div>
+    <div class="registrations-header">
+        <p class="flex-item">Ship ID</p>
+        <p class="flex-item">Mapping</p>
+        <p class="flex-item">Status</p>
+        <p class="flex-item">Actions</p>
+    </div>
+    <!-- <div class="ship-registration">
+        <registration [registration]="{id:1, shipId:'Ship-1', certificateARN:'abc', status:'awaiting_status', shipName: '', clientName: ''}" (updateRegistrationsEvent)="getRegistrations()" (updateErrorMessageEvent)="updateErrorMessage($event)"/>
+    </div> -->
     <div class="ship-registration" *ngFor="let registration of registrations">
-        <registration [registration]="registration" (updateRegistrationsEvent)="getRegistrations()"/>
+        <registration [registration]="registration" (updateRegistrationsEvent)="getRegistrations()" (updateErrorMessageEvent)="updateErrorMessage($event)"/>
     </div>
 </div>

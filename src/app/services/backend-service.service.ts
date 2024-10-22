@@ -3,9 +3,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Registration } from '../../types/registration';
 import { environment } from '../../environments/environment';
 import { catchError, Observable, throwError } from 'rxjs';
-import { fetchAuthSession, } from 'aws-amplify/auth';
+import { fetchAuthSession } from 'aws-amplify/auth';
 import { CreateRegistration } from '../create-registration/create-registration';
 import { AccessToken } from '../../types/accessToken';
+import * as sentry from '@sentry/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +15,14 @@ export class BackendService {
   BACKEND_API = environment.BACKEND_API;
   constructor(private http: HttpClient) { }
   handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error);
-    } else {
-      // The backend returned an unsuccessful response code.
-      // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, body was: `, error.error);
-    }
     // Return an observable with a user-facing error message.
-    return throwError(() => new Error('Something bad happened; please try again later.'));
+    return throwError(() => new Error(error.message));
+  }
+
+  async getUserGroup() {
+    const { accessToken, } = await this.getTokens();
+    const groups = accessToken?.payload['cognito:groups']
+    return groups;
   }
 
   async getTokens() {
@@ -32,7 +30,7 @@ export class BackendService {
       const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
       return { accessToken, idToken }
     } catch (error) {
-      console.log(error);
+      sentry.captureException(error);
       return {};
     }
   }
@@ -60,7 +58,7 @@ export class BackendService {
     }).pipe(catchError(this.handleError));
   }
 
-  async getRegistrations() : Promise<Observable<Registration[]>> {
+  async getRegistrations() {
     const {accessToken, idToken } = await this.getTokens();
     return this.http.get<Registration[]>(`${this.BACKEND_API}/v1/register/status`, {
       headers: {
@@ -142,7 +140,7 @@ export class BackendService {
         'Authorization': `${accessToken}`,
         'Content-Type': 'application/json'
       },
-    })
+    }).pipe(catchError(this.handleError))
   }
   
   async getAccessTokens() : Promise<Observable<AccessToken[]>> {
@@ -152,7 +150,7 @@ export class BackendService {
       headers: {
         'Authorization': `${accessToken}`,
       },
-    })
+    }).pipe(catchError(this.handleError))
   }
 
   async validateAccessToken(id: number) {
@@ -162,7 +160,7 @@ export class BackendService {
       headers: {
         'Authorization': `${accessToken}`,
       },
-    })
+    }).pipe(catchError(this.handleError))
   }
 
   async invalidateAccessToken(id: number) {
@@ -172,7 +170,7 @@ export class BackendService {
       headers: {
         'Authorization': `${accessToken}`,
       },
-    })
+    }).pipe(catchError(this.handleError))
   }
   
   async deleteAccessToken(id: number) {
@@ -182,6 +180,6 @@ export class BackendService {
       headers: {
         'Authorization': `${accessToken}`,
       },
-    })
+    }).pipe(catchError(this.handleError))
   }
 }

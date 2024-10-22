@@ -1,12 +1,32 @@
 <div class="access-tokens">
-    <div class="access-tokens-header">
+    <div class="access-tokens-title">
         <h2>Access Tokens</h2>
-        <p> {{ accessTokens.length }} </p>
-        <button (click)="updateAccessTokens()"> Get access tokens </button>
-        <button (click)="generateAccessToken()">Generate new access token</button>
+        <mat-spinner *ngIf="isLoading" class="spinner"/>
+        <div class="access-tokens-buttons">
+            <button class="btn btn-normal" (click)="updateAccessTokens()"> Get access tokens </button>
+            <button class="btn btn-normal" (click)="generateAccessToken()">Generate new access token</button>
+        </div>
+    </div>
+    <div *ngIf="showErrorMessage" class="error-alert">
+        <p class="error-message"> {{errorMessage}} </p>
+    </div>
+    <div *ngIf="showSuccessMessage" class="success-alert">
+        <p class="success-message"> {{successMessage}} </p>
+    </div>
+    <div class="access-tokens-header">
+        <p class="flex-item">Token</p>
+        <p class="flex-item">Valid</p>
+        <p class="flex-item">Action</p>
     </div>
     <div class="access-token" *ngFor="let accessToken of accessTokens">
-        <div>
+        <p class="access-token-token access-token-general">{{ accessToken.token }}</p>
+        <p class="access-token-valid access-token-general">{{ accessToken.valid }}</p>
+        <div class="access-token-buttons access-token-general">
+            <button *ngIf="true" class="btn btn-action" (click)="invalidateToken(accessToken.id)">Invalidate token</button>
+            <button *ngIf="!true" class="btn btn-action" (click)="validateToken(accessToken.id)">Validate Token</button>
+            <button class="btn btn-delete" (click)="deleteToken(accessToken.id)">Delete token</button>
+        </div>
+        <!-- <div>
             <div>
                 <p>token: {{ accessToken.token }}</p>
                 <p>valid: {{ accessToken.valid }}</p>
@@ -16,6 +36,6 @@
                 <button class="btn" (click)="validateToken(accessToken.id)">Validate Token</button>
                 <button class="btn" (click)="deleteToken(accessToken.id)">Delete token</button>
             </div>
-        </div> 
+        </div>  -->
     </div>
 </div>

@@ -1,23 +1,21 @@
 <div class="registration">
-    <div class="registration-info">
-        <p class="ship-id">Ship id: {{registration.shipId}}</p>
+    <div class="registration-info flex-item">
+        <p class="ship-id">{{registration.shipId}}</p>
     </div>
-    <div class="mapping-info">
-        <div>
-            <label for="ship-name">Ship name:</label>
-            <input id="ship-name" class="ship-name" type="text" placeholder="ship name" [(ngModel)]="registration.shipName">
-        </div>
-        <div>
-            <label for="client-name">Client name:</label>
-            <input id="client-name" class="client-name" type="text" placeholder="client name" [(ngModel)]="registration.clientName">
-        </div>
+    <div class="mapping-info flex-item">
+        <input *ngIf="!registration.shipInformation?.shipName" id="ship-name" class="ship-name input" type="text" placeholder="ship name" [(ngModel)]="registration.shipName">
+        <input *ngIf="!registration.shipInformation?.clientName" id="client-name" class="client-name input" type="text" placeholder="client name" [(ngModel)]="registration.clientName">
+        <p *ngIf="registration.shipInformation?.shipName">ship name: {{registration.shipInformation?.shipName}}</p>
+        <p *ngIf="registration.shipInformation?.clientName">client name: {{registration.shipInformation?.clientName}}</p>
     </div>  
-    <div *ngIf="registration?.status === 'awaiting_status'" class="registration-actions">
+    <div class="flex-item status">
+        <p>{{registration.status}}</p>
+    </div>
+    <div *ngIf="registration?.status === 'awaiting_status'" class="registration-actions flex-item">
         <button (click)="acceptRegistration(registration)" class="btn btn-accept">Accept</button>
         <button (click)="denyRegistration(registration)" class="btn btn-deny">Deny</button>
     </div>
-    <div *ngIf="registration.status !== 'awaiting_status'" class="registration-actions">
-        <p>{{registration.status}}</p>
+    <div *ngIf="registration.status !== 'awaiting_status'" class="registration-actions flex-item">
         <button class="btn" (click)="resetRegistration(registration)">Reset registration</button>
         <button class="btn" (click)="revokeCertificate(registration)">Revoke Certificate</button>
     </div>

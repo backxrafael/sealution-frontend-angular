@@ -1,12 +1,18 @@
-<div id="create-registation">
+<div id="create-registration">
     <div>
-        <h1>Create a registration</h1>
+        <h1 style="text-align: center;">Create a registration</h1>
     </div>
-    <div>
+    <div *ngIf="showErrorMessage" class="error-alert">
+        <p class="error-message"> {{errorMessage}} </p>
+    </div>
+    <div *ngIf="showSuccessMessage" class="success-alert">
+        <p class="success-message"> {{successMessage}} </p>
+    </div>
+    <div class="create-registration">
         <input [(ngModel)]="createRegistration.shipId" type="text" placeholder="Ship id">
-        <div>
-            <button (click)="createAuthenticationRegistration()">Create authentication registration</button>
-            <button (click)="pollAuthenticationRegistration()">Get authentication registration status</button>
+        <div class="create-registration-buttons">
+            <button class="btn btn-create" (click)="createAuthenticationRegistration()">Create</button>
+            <button class="btn btn-normal" (click)="pollAuthenticationRegistration()">Fetch status</button>
         </div>
     </div>
 </div>

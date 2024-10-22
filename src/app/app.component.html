@@ -7,20 +7,31 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<h1>Sealution frontend</h1>
 <amplify-authenticator>
     <ng-template
     amplifySlot="authenticated"
     let-user="user"
     let-signOut="signOut">
-        <h3>Welcome {{ user.username }}</h3>
-        <button (click)="signOut()">Sign Out</button>
-        <div style="display: flex; flex-direction: row; gap: 2vw;">
-            <registrations></registrations>
-            <create-registration></create-registration>
-            <access-tokens></access-tokens>
+    <div class="container">
+        <div class="header">
+            <div style="flex-basis: 10%;"></div>
+            <h1 class="text-center">Sealution frontend</h1>
+            <button class="signout-btn" (click)="signOut()">
+                <img src="assets/signout.png" alt="Sign out icon">
+                Sign out
+            </button>
         </div>
-
+        <h3 class="text-center">Welcome {{ user.username }}</h3>
+        <div style="display: flex; flex-direction: row; gap: 2vw; width:75%">
+            <div *ngIf="userGroups.includes('Admin')" class="main-container">
+                <registrations style="width: 50%;"></registrations>
+                <access-tokens style="width: 50%;"></access-tokens>
+            </div>
+            <div *ngIf="userGroups.includes('Client')" class="main-container">
+                <create-registration></create-registration>
+            </div>
+        </div>
+    </div>
     </ng-template>
 </amplify-authenticator>
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

@@ -2,4 +2,7 @@
 /* @import 'node_modules/@aws-amplify/ui-angular/theme.css'; */
 html {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f5f5;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
