@@ -32,17 +32,11 @@ export class CreateRegistrationComponent {
                 this.successMessage = 'Successfully created the authentication request';
             },
             error: (error) => {
-                try {
-                    console.log(environment);
-                    console.log(environment.SENTRY_DSN);
-                    this.showErrorMessage = true;
-                    this.showSuccessMessage = false;
-                    this.errorMessage = 'There was an error creating the registration request, please try again later'
-                    const id = sentry.captureException(error);
-                    console.log(`Error ID: ${id}`);
-                } catch (error) {
-                    console.error('Error capturing error', error);
-                }
+                this.showErrorMessage = true;
+                this.showSuccessMessage = false;
+                this.errorMessage = 'There was an error creating the registration request, please try again later'
+                const id = sentry.captureException(error);
+                console.error('Error capturing error', error);
             }
         })
     }
