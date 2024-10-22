@@ -33,6 +33,7 @@ export class CreateRegistrationComponent {
             },
             error: (error) => {
                 try {
+                    console.log(environment);
                     console.log(environment.SENTRY_DSN);
                     this.showErrorMessage = true;
                     this.showSuccessMessage = false;
