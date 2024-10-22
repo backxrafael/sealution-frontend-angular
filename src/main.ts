@@ -7,6 +7,7 @@ import * as Sentry from "@sentry/angular";
 
 Sentry.init({
   dsn: environment.SENTRY_DSN,
+  debug: true,
   integrations: [
     Sentry.browserTracingIntegration(),
     Sentry.replayIntegration(),
