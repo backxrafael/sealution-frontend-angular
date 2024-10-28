@@ -29,7 +29,7 @@ export class AccessTokensComponent {
                 this.accessTokens = result
                 this.showErrorMessage = false;
                 this.showSuccessMessage = true
-                this.errorMessage = 'Successfully fetched the access token, ';
+                this.successMessage = 'Successfully fetched the access token, ';
                 this.isLoading = false;
             },
             error: (error) => {
@@ -47,7 +47,7 @@ export class AccessTokensComponent {
             next: (_result) => {
                 this.updateAccessTokens();
                 this.showSuccessMessage = true
-                this.errorMessage = 'Successfully generated an access token, ';
+                this.successMessage = 'Successfully generated an access token, ';
             },
             error: (error) => {
                 this.showErrorMessage = true;

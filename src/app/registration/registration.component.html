@@ -3,10 +3,10 @@
         <p class="ship-id">{{registration.shipId}}</p>
     </div>
     <div class="mapping-info flex-item">
-        <input *ngIf="!registration.shipInformation?.shipName" id="ship-name" class="ship-name input" type="text" placeholder="ship name" [(ngModel)]="registration.shipName">
-        <input *ngIf="!registration.shipInformation?.clientName" id="client-name" class="client-name input" type="text" placeholder="client name" [(ngModel)]="registration.clientName">
-        <p *ngIf="registration.shipInformation?.shipName">ship name: {{registration.shipInformation?.shipName}}</p>
-        <p *ngIf="registration.shipInformation?.clientName">client name: {{registration.shipInformation?.clientName}}</p>
+        <input *ngIf="!registration.shipInformation?.shipName || registration.status === 'awaiting_status'" id="ship-name" class="ship-name input" type="text" placeholder="ship name" [(ngModel)]="registration.shipName">
+        <input *ngIf="!registration.shipInformation?.clientName || registration.status === 'awaiting_status'" id="client-name" class="client-name input" type="text" placeholder="client name" [(ngModel)]="registration.clientName">
+        <p *ngIf="registration.shipInformation?.shipName && registration.status !== 'awaiting_status'">ship name: {{registration.shipInformation?.shipName}}</p>
+        <p *ngIf="registration.shipInformation?.clientName && registration.status !== 'awaiting_status'">client name: {{registration.shipInformation?.clientName}}</p>
     </div>  
     <div class="flex-item status">
         <p>{{registration.status}}</p>
